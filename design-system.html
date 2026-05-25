@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sistema de diseño · Cristian Casamitjana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+.ds-hero { background: var(--cream); padding: clamp(56px, 7vw, 90px) 0; }
+.ds-hero__grid { display: grid; grid-template-columns: 1.4fr .6fr; gap: 64px; align-items: end; }
+.ds-hero h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1; margin-bottom: 16px; }
+.ds-hero h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+.ds-hero p { color: var(--ink-soft); font-size: 17px; max-width: 580px; }
+.ds-hero .marks { display: flex; gap: 24px; align-items: center; justify-content: flex-end; }
+.ds-hero .marks .swatch { width: 36px; height: 36px; border-radius: 50%; }
+.ds-section { padding: clamp(64px,8vw,100px) 0; border-top: 1px solid var(--hairline); }
+.ds-section h2 { font-size: clamp(28px,3vw,38px); margin-bottom: 8px; }
+.ds-section .descr { color: var(--gray); font-size: 16px; margin-bottom: 40px; max-width: 720px; }
+
+/* Color swatches */
+.swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.sw {
+  border-radius: 12px; padding: 24px; height: 200px; display: flex; flex-direction: column; justify-content: flex-end;
+  border: 1px solid var(--hairline); color: var(--ink);
+}
+.sw .name { font-family: var(--f-display); font-size: 22px; font-weight: 600; }
+.sw .hex { font-family: ui-monospace, 'Menlo', monospace; font-size: 13px; opacity: .7; margin-top: 4px; }
+.sw .role { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: auto; }
+.sw--navy { background: var(--navy); color: var(--gold); }
+.sw--gold { background: var(--gold); color: white; }
+.sw--cream { background: var(--cream); }
+.sw--ink { background: var(--ink); color: white; }
+.sw--gray { background: var(--gray); color: white; }
+@media (max-width: 980px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+
+/* Color steps */
+.color-steps { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 24px; }
+.step { height: 80px; border-radius: 4px; display: flex; align-items: flex-end; padding: 8px; font-size: 11px; color: rgba(255,255,255,.85); font-family: ui-monospace, monospace; }
+.step.dark { color: rgba(0,0,0,.65); }
+
+/* Typography ladder */
+.type-row { display: grid; grid-template-columns: 140px 1fr 160px; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--hairline); align-items: baseline; }
+.type-row:last-child { border-bottom: 0; }
+.type-row .label { font-family: ui-monospace, monospace; font-size: 12px; color: var(--gray); letter-spacing: .04em; padding-top: 8px; }
+.type-row .meta { font-family: ui-monospace, monospace; font-size: 12px; color: var(--gray); text-align: right; padding-top: 8px; }
+.t-h1 { font-family: var(--f-display); font-size: 56px; font-weight: 600; line-height: 1.05; color: var(--navy); }
+.t-h2 { font-family: var(--f-display); font-size: 40px; font-weight: 600; line-height: 1.1; color: var(--navy); }
+.t-h3 { font-family: var(--f-display); font-size: 28px; font-weight: 600; color: var(--navy); }
+.t-h4 { font-family: var(--f-body); font-size: 20px; font-weight: 600; color: var(--navy); }
+.t-eyebrow { font-family: var(--f-body); font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.t-lead { font-size: 19px; line-height: 1.6; color: var(--ink-soft); }
+.t-body { font-size: 17px; line-height: 1.65; color: var(--ink); }
+.t-caption { font-size: 13px; color: var(--gray); }
+.t-quote { font-family: var(--f-display); font-style: italic; font-size: 24px; line-height: 1.4; color: var(--navy); }
+
+/* Component grid */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.comp {
+  background: var(--white); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden;
+}
+.comp__label { background: var(--cream); padding: 12px 20px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gray); font-weight: 600; border-bottom: 1px solid var(--hairline); display: flex; justify-content: space-between; }
+.comp__body { padding: 32px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.comp__body.dark { background: var(--navy); }
+.comp--full { grid-column: 1 / -1; }
+@media (max-width: 880px) { .comp-grid { grid-template-columns: 1fr; } }
+
+/* Icon grid */
+.icons { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.icon-card {
+  aspect-ratio: 1/1; border: 1px solid var(--hairline); border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  color: var(--gold); background: var(--white);
+}
+.icon-card small { font-size: 11px; color: var(--gray); font-family: ui-monospace, monospace; }
+@media (max-width: 880px) { .icons { grid-template-columns: repeat(3,1fr); } }
+
+/* Logo block */
+.logos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.logo-card { padding: 64px; border-radius: 12px; border: 1px solid var(--hairline); display: flex; align-items: center; justify-content: center; }
+.logo-card.dark { background: var(--navy); }
+.logo-card img { max-width: 280px; height: auto; }
+@media (max-width: 880px) { .logos { grid-template-columns: 1fr; } }
+
+/* Spacing */
+.space-row { display: grid; grid-template-columns: 80px 1fr 80px; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+.space-row .bar { background: var(--gold-tint); height: 16px; border-radius: 2px; }
+.space-row .name { font-family: ui-monospace, monospace; font-size: 13px; color: var(--gray); }
+.space-row .val { font-family: ui-monospace, monospace; font-size: 13px; color: var(--gray); text-align: right; }
+
+/* Shadow */
+.shadow-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.shadow-card { aspect-ratio: 4/3; background: var(--white); border-radius: 10px; display: flex; align-items: flex-end; padding: 20px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--gray); }
+.shadow-card.sm { box-shadow: var(--shadow-sm); }
+.shadow-card.md { box-shadow: var(--shadow); }
+.shadow-card.lg { box-shadow: var(--shadow-lg); }
+
+/* Pages nav */
+.pages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.page-card {
+  display: flex; gap: 16px; align-items: center; padding: 20px; background: var(--white);
+  border: 1px solid var(--hairline); border-radius: 10px; transition: all .25s;
+}
+.page-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.page-card .num { font-family: var(--f-display); font-size: 30px; color: var(--gold); width: 40px; }
+.page-card strong { display: block; color: var(--navy); font-size: 16px; }
+.page-card small { color: var(--gray); font-size: 13px; }
+@media (max-width: 880px) { .pages { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body data-page="">
+<div id="nav-mount"></div>
+
+<!-- ============ HERO ============ -->
+<section class="ds-hero">
+  <div class="container container--wide">
+    <div class="ds-hero__grid">
+      <div>
+        <span class="eyebrow">Sistema de diseño · v1.0</span>
+        <h1>Las piezas con las que construimos la marca de <em>Cristian Casamitjana</em></h1>
+        <p>Tokens, tipografía, color, componentes y plantillas. Una sola referencia para diseño y desarrollo — para mantener la coherencia en cada página, recurso y comunicación.</p>
+      </div>
+      <div class="marks">
+        <span class="swatch" style="background: var(--navy)"></span>
+        <span class="swatch" style="background: var(--gold)"></span>
+        <span class="swatch" style="background: var(--cream); border:1px solid var(--hairline)"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGES ============ -->
+<section class="ds-section">
+  <div class="container container--wide">
+    <h2>Páginas de la web</h2>
+    <p class="descr">Seis páginas en total. Estructura plana, sin desplegables. Cada una con un objetivo de conversión claro.</p>
+    <div class="pages">
+      <a class="page-card" href="index.html"><span class="num">01</span><div><strong>Inicio</strong><small>Hero, problema, enfoque, encaje, servicios, CTA</small></div></a>
+      <a class="page-card" href="sobre-mi.html"><span class="num">02</span><div><strong>Sobre mí</strong><small>Historia, enfoque integrativo, principios</small></div></a>
+      <a class="page-card" href="sesiones.html"><span class="num">03</span><div><strong>Sesiones</strong><small>Hub online + presencial, FAQ</small></div></a>
+      <a class="page-card" href="programa.html"><span class="num">04</span><div><strong>Programa 7 semanas</strong><small>Transformación Personal 1 a 1</small></div></a>
+      <a class="page-card" href="contenidos.html"><span class="num">05</span><div><strong>Contenidos</strong><small>YouTube, podcast, artículos, meditaciones</small></div></a>
+      <a class="page-card" href="contacto.html"><span class="num">06</span><div><strong>Contacto</strong><small>Formulario (sin WhatsApp)</small></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGOS ============ -->
+<section class="ds-section section--cream">
+  <div class="container container--wide">
+    <h2>Logos</h2>
+    <p class="descr">El logo de color (azul + amarillo) se usa en header sobre fondo claro. La versión blanca se reserva para footer y fondos oscuros.</p>
+    <div class="logos">
+      <div class="logo-card">
+        <img src="assets/logo-color.png" alt="Logo color para fondos claros" />
+      </div>
+      <div class="logo-card dark">
+        <img src="assets/logo-white.png" alt="Logo blanco para fondos oscuros" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLOR ============ -->
+<section class="ds-section">
+  <div class="container container--wide">
+    <h2>Paleta</h2>
+    <p class="descr">Una paleta sobria y cálida: navy profundo como base, dorado para acentos y CTAs, crema para suavizar los contrastes. Sin saturaciones agresivas.</p>
+
+    <div class="swatches">
+      <div class="sw sw--navy">
+        <span class="role">Primario</span>
+        <span class="name">Navy</span>
+        <span class="hex">#1B2B4B</span>
+      </div>
+      <div class="sw sw--gold">
+        <span class="role">Acento</span>
+        <span class="name">Gold</span>
+        <span class="hex">#C9A84C</span>
+      </div>
+      <div class="sw sw--cream">
+        <span class="role">Fondo</span>
+        <span class="name">Cream</span>
+        <span class="hex">#F9F6F0</span>
+      </div>
+      <div class="sw sw--ink">
+        <span class="role">Texto</span>
+        <span class="name">Ink</span>
+        <span class="hex">#1A1A1A</span>
+      </div>
+      <div class="sw sw--gray">
+        <span class="role">Secundario</span>
+        <span class="name">Gray</span>
+        <span class="hex">#666666</span>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 56px; font-family: var(--f-display); font-size: 22px">Escalas</h3>
+    <p class="descr">Variaciones para hover, fondos y bordes. Generadas alrededor de la paleta base.</p>
+    <div class="color-steps">
+      <div class="step" style="background:#0E1A33">#0E1A33</div>
+      <div class="step" style="background:#121E37">#121E37</div>
+      <div class="step" style="background:#1B2B4B">#1B2B4B</div>
+      <div class="step" style="background:#243657">#243657</div>
+      <div class="step" style="background:#3D4F73">#3D4F73</div>
+      <div class="step dark" style="background:#8794AE">#8794AE</div>
+      <div class="step dark" style="background:#C9D1E2">#C9D1E2</div>
+    </div>
+    <div class="color-steps" style="margin-top: 8px">
+      <div class="step" style="background:#856820">#856820</div>
+      <div class="step" style="background:#A48224">#A48224</div>
+      <div class="step" style="background:#B89537">#B89537</div>
+      <div class="step" style="background:#C9A84C">#C9A84C</div>
+      <div class="step dark" style="background:#E3CC85">#E3CC85</div>
+      <div class="step dark" style="background:#F4EBD2">#F4EBD2</div>
+      <div class="step dark" style="background:#FAF4DF">#FAF4DF</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section class="ds-section section--cream">
+  <div class="container container--wide">
+    <h2>Tipografía</h2>
+    <p class="descr"><strong>Playfair Display</strong> aporta el carácter editorial y emocional de los titulares. <strong>Inter</strong> sostiene la lectura del cuerpo y la interfaz con claridad.</p>
+
+    <div class="type-row">
+      <div class="label">Display H1</div>
+      <div class="t-h1">Deja de repetir patrones.</div>
+      <div class="meta">Playfair 56–72 / 600</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H2</div>
+      <div class="t-h2">Una psicología integrativa</div>
+      <div class="meta">Playfair 40 / 600</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H3</div>
+      <div class="t-h3">Cómo trabajamos juntos</div>
+      <div class="meta">Playfair 28 / 600</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H4 / Subtítulo</div>
+      <div class="t-h4">Más allá del trabajo</div>
+      <div class="meta">Inter 20 / 600</div>
+    </div>
+    <div class="type-row">
+      <div class="label">Eyebrow</div>
+      <div class="t-eyebrow">— Programa profundo de —</div>
+      <div class="meta">Inter 13 / 600 · 0.22em</div>
+    </div>
+    <div class="type-row">
+      <div class="label">Lead</div>
+      <div class="t-lead">Si tu mente no para y sientes que estás atrapado en lo mismo, aquí vas a entender por qué.</div>
+      <div class="meta">Inter 19 / 400</div>
+    </div>
+    <div class="type-row">
+      <div class="label">Body</div>
+      <div class="t-body">Trabajo desde una psicología integrativa que tiene en cuenta cuatro dimensiones que se sostienen entre sí: lo emocional, lo mental, lo conductual y lo transgeneracional.</div>
+      <div class="meta">Inter 17 / 400</div>
+    </div>
+    <div class="type-row">
+      <div class="label">Quote</div>
+      <div class="t-quote">"No se trata de cambiar quién eres, sino de dejar de repetir lo que aprendiste."</div>
+      <div class="meta">Playfair italic 24 / 400</div>
+    </div>
+    <div class="type-row">
+      <div class="label">Caption</div>
+      <div class="t-caption">Plazas limitadas cada mes · Confidencialidad</div>
+      <div class="meta">Inter 13 / 400</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUTTONS ============ -->
+<section class="ds-section">
+  <div class="container container--wide">
+    <h2>Botones</h2>
+    <p class="descr">Tres jerarquías. El CTA principal es siempre dorado sólido y aparece en el hero, sticky en navbar y al cierre de cada página.</p>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <div class="comp__label"><span>Primary</span><span>btn--primary</span></div>
+        <div class="comp__body">
+          <a class="btn btn--primary">Reservar sesión</a>
+          <a class="btn btn--primary btn--lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Reservar mi sesión gratis
+          </a>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="comp__label"><span>Secondary</span><span>btn--secondary</span></div>
+        <div class="comp__body">
+          <a class="btn btn--secondary">Conocer mi enfoque</a>
+          <a class="btn btn--secondary btn--lg">Ver el programa</a>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="comp__label"><span>Ghost / link</span><span>btn--ghost</span></div>
+        <div class="comp__body">
+          <a class="btn btn--ghost">Ver canal YouTube →</a>
+          <a class="btn btn--ghost">Leer todos los artículos →</a>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="comp__label"><span>White (sobre fondo oscuro)</span><span>btn--white</span></div>
+        <div class="comp__body dark">
+          <a class="btn btn--white">Escuchar podcast</a>
+          <a class="btn btn--primary">Reservar sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS ============ -->
+<section class="ds-section section--cream">
+  <div class="container container--wide">
+    <h2>Componentes</h2>
+    <p class="descr">Tarjetas, etiquetas, citas, iconografía. Las piezas reutilizables que dan ritmo a toda la web.</p>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <div class="comp__label"><span>Tag · Pill</span><span>.tag</span></div>
+        <div class="comp__body">
+          <span class="tag">7 semanas</span>
+          <span class="tag tag--gold">Proceso 1 a 1</span>
+          <span class="tag"><span class="stars">★★★★★</span> 4,9</span>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="comp__label"><span>Card / testimonio</span><span>.card</span></div>
+        <div class="comp__body" style="background: var(--cream)">
+          <div style="background:white;padding:24px;border-radius:8px;border-left:3px solid var(--gold);max-width:380px">
+            <div class="stars">★★★★★</div>
+            <p style="font-family:var(--f-display);font-style:italic;color:var(--navy);margin:8px 0 12px;font-size:16px">"Ha sido un antes y un después."</p>
+            <small style="color:var(--gray);font-size:12px">— Marcos Q.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp comp--full">
+        <div class="comp__label"><span>Reservation card</span><span>Reusable across pages</span></div>
+        <div class="comp__body" style="display:block">
+          <div style="background:white;border:1px solid var(--gold-soft);border-radius:14px;padding:32px;display:grid;grid-template-columns:80px 1fr 1fr;gap:32px;align-items:center;max-width:980px;margin:0 auto">
+            <div style="width:80px;height:80px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold)">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0 1 16 0"/></svg>
+            </div>
+            <div style="font-size:16px;color:var(--ink-soft);line-height:1.5">
+              Proceso guiado por <strong style="color:var(--navy)">Cristian Casamitjana</strong>, totalmente personalizado <strong style="color:var(--navy)">1 a 1</strong> durante <strong style="color:var(--navy)">7 semanas.</strong>
+            </div>
+            <div>
+              <a class="btn btn--primary" style="width:100%;text-align:center">Reserva tu sesión gratis</a>
+              <small style="display:block;text-align:center;color:var(--gray);font-size:12px;margin-top:8px">Plazas limitadas cada mes.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__label"><span>Form field</span><span>label-only underline</span></div>
+        <div class="comp__body" style="display:block">
+          <label style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);font-weight:600;display:block;margin-bottom:8px">Email <span style="color:var(--gold)">*</span></label>
+          <input type="email" placeholder="tu@correo.com" style="border:0;border-bottom:1.5px solid var(--hairline);padding:8px 0;font:inherit;font-size:15px;background:transparent;outline:0;width:100%" />
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__label"><span>Quote block</span><span>Hero / closing</span></div>
+        <div class="comp__body" style="display:block">
+          <div style="text-align:center;background:var(--cream);padding:32px;border-radius:8px">
+            <div style="font-family:var(--f-display);font-size:48px;color:var(--gold);line-height:.5;margin-bottom:8px;opacity:.7">"</div>
+            <blockquote style="font-family:var(--f-display);font-style:italic;color:var(--navy);margin:0;font-size:20px;line-height:1.4">No se trata de cambiar quién eres, sino de dejar de repetir lo que aprendiste.</blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ICONS ============ -->
+<section class="ds-section">
+  <div class="container container--wide">
+    <h2>Iconografía</h2>
+    <p class="descr">Outline 1.6–2px, color dorado o navy según contexto. Limitada a un set funcional: las 4 dimensiones, navegación, social, estado del programa. Sin emojis en producción.</p>
+    <div class="icons">
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><small>heart</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44M14.5 2a2.5 2.5 0 0 0-2.5 2.5v15a2.5 2.5 0 0 0 4.96.44"/></svg><small>brain</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V14M7 14a5 5 0 0 1 0-7 5 5 0 0 1 10 0 5 5 0 0 1 0 7"/></svg><small>tree</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.5 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0 0 20.5 15"/></svg><small>loop</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2"/></svg><small>sun</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><small>moon</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-1a6 6 0 0 1 12 0v1"/></svg><small>people</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><small>calendar</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><small>search</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><small>mail</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-5.8 31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg><small>youtube</small></div>
+      <div class="icon-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3"/></svg><small>mic</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPACING & RADII ============ -->
+<section class="ds-section section--cream">
+  <div class="container container--wide" style="display:grid;grid-template-columns:1fr 1fr;gap:64px">
+    <div>
+      <h2>Spacing</h2>
+      <p class="descr">Escala base de 8. Múltiplos consistentes para márgenes y paddings.</p>
+      <div class="space-row"><span class="name">--s-1</span><span class="bar" style="width:4px"></span><span class="val">4 px</span></div>
+      <div class="space-row"><span class="name">--s-2</span><span class="bar" style="width:8px"></span><span class="val">8 px</span></div>
+      <div class="space-row"><span class="name">--s-3</span><span class="bar" style="width:12px"></span><span class="val">12 px</span></div>
+      <div class="space-row"><span class="name">--s-4</span><span class="bar" style="width:16px"></span><span class="val">16 px</span></div>
+      <div class="space-row"><span class="name">--s-5</span><span class="bar" style="width:24px"></span><span class="val">24 px</span></div>
+      <div class="space-row"><span class="name">--s-6</span><span class="bar" style="width:32px"></span><span class="val">32 px</span></div>
+      <div class="space-row"><span class="name">--s-7</span><span class="bar" style="width:48px"></span><span class="val">48 px</span></div>
+      <div class="space-row"><span class="name">--s-8</span><span class="bar" style="width:64px"></span><span class="val">64 px</span></div>
+      <div class="space-row"><span class="name">--s-9</span><span class="bar" style="width:96px"></span><span class="val">96 px</span></div>
+    </div>
+    <div>
+      <h2>Radios</h2>
+      <p class="descr">Esquinas suaves, sin exageraciones. El 999px se reserva para pills y botones de newsletter.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="aspect-ratio:3/2;background:white;border:1px solid var(--hairline);border-radius:4px;display:flex;align-items:flex-end;padding:16px;font-family:ui-monospace,monospace;font-size:12px;color:var(--gray)">4 px · sm</div>
+        <div style="aspect-ratio:3/2;background:white;border:1px solid var(--hairline);border-radius:8px;display:flex;align-items:flex-end;padding:16px;font-family:ui-monospace,monospace;font-size:12px;color:var(--gray)">8 px · base</div>
+        <div style="aspect-ratio:3/2;background:white;border:1px solid var(--hairline);border-radius:16px;display:flex;align-items:flex-end;padding:16px;font-family:ui-monospace,monospace;font-size:12px;color:var(--gray)">16 px · lg</div>
+        <div style="aspect-ratio:3/2;background:white;border:1px solid var(--hairline);border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:12px;color:var(--gray)">999 px · pill</div>
+      </div>
+
+      <h2 style="margin-top: 48px">Sombras</h2>
+      <p class="descr">Suaves y con tinte navy.</p>
+      <div class="shadow-row">
+        <div class="shadow-card sm">sm</div>
+        <div class="shadow-card md">md</div>
+        <div class="shadow-card lg">lg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOICE ============ -->
+<section class="ds-section">
+  <div class="container container--wide" style="display:grid;grid-template-columns:1fr 1.4fr;gap:64px">
+    <div>
+      <h2>Voz y tono</h2>
+      <p class="descr">Cálido, claro, directo. Sin promesas mágicas. Habla en segunda persona. Las frases pueden cortarse: pausa, respira, sigue.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card" style="background:#F1F7F2;border-color:#DBE8DE;border-left:4px solid var(--success)">
+        <strong style="color:var(--success);font-size:12px;letter-spacing:.14em;text-transform:uppercase">Sí decimos</strong>
+        <ul style="padding:0;list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--ink-soft)">
+          <li>"Sabes lo que te pasa… pero no consigues cambiarlo."</li>
+          <li>"Vamos a ir a la raíz, no a la superficie."</li>
+          <li>"No necesitas tenerlo claro para empezar. Pero sí necesitas dar un paso."</li>
+        </ul>
+      </div>
+      <div class="card" style="background:#FBF3F2;border-color:#ECDBD9;border-left:4px solid var(--danger)">
+        <strong style="color:var(--danger);font-size:12px;letter-spacing:.14em;text-transform:uppercase">Evitamos</strong>
+        <ul style="padding:0;list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--ink-soft)">
+          <li>"Transforma tu vida en 30 días"</li>
+          <li>"El método definitivo para…"</li>
+          <li>"Libérate para siempre del dolor"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="partials.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sobre mí · Cristian Casamitjana · Psicología integrativa</title>
+<meta name="description" content="Mi historia, mi enfoque y la psicología integrativa con la que acompaño procesos de transformación personal." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ---- Hero ---- */
+.about-hero { background: var(--cream); padding-top: clamp(48px, 7vw, 80px); }
+.about-hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.about-hero h1 { font-size: clamp(40px, 5vw, 60px); line-height: 1.1; margin-bottom: 24px; }
+.about-hero h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+.about-hero .visual { aspect-ratio: 4/5; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+.about-hero .visual img { width: 100%; height: 100%; object-fit: cover; }
+.about-hero .visual::after { content: ''; position: absolute; right: -24px; bottom: -24px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 8px; z-index: -1; }
+.about-hero p.intro { font-family: var(--f-display); font-style: italic; font-size: 22px; color: var(--navy); margin: 0; }
+@media (max-width: 880px) { .about-hero__grid { grid-template-columns: 1fr; } }
+
+/* ---- Story sections (alternating) ---- */
+.story-block { padding: clamp(72px, 10vw, 120px) 0; }
+.story-block__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.story-block.alt .story-block__grid { grid-template-columns: 1fr 1fr; }
+.story-block.alt .story-block__visual { order: -1; }
+.story-block__visual { aspect-ratio: 5/6; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+.story-block__visual img { width: 100%; height: 100%; object-fit: cover; }
+.story-block h2 { margin-bottom: 24px; }
+.story-block p { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 18px; }
+.story-block ul.tags { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 24px 0; }
+.story-block ul.tags li { padding: 8px 16px; background: var(--cream); border: 1px solid var(--hairline); border-radius: 999px; font-size: 13px; color: var(--navy); font-weight: 500; }
+@media (max-width: 880px) {
+  .story-block__grid, .story-block.alt .story-block__grid { grid-template-columns: 1fr; gap: 40px; }
+  .story-block.alt .story-block__visual { order: 0; }
+}
+
+/* ---- Key quote ---- */
+.keyquote { background: var(--cream-deep); padding: clamp(80px, 9vw, 120px) 0; text-align: center; }
+.keyquote .ornament { justify-content: center; margin-bottom: 32px; }
+.keyquote blockquote { margin: 0; font-family: var(--f-display); font-style: italic; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.35; color: var(--navy); max-width: 900px; margin-inline: auto; }
+.keyquote blockquote em { color: var(--gold); font-style: italic; font-weight: 500; }
+
+/* ---- Approach 4 pillars ---- */
+.pillars { background: var(--cream); }
+.pillars__head { text-align: center; max-width: 760px; margin: 0 auto 64px; }
+.pillars__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.pillar {
+  background: var(--white); padding: 36px 28px; border-radius: 12px;
+  border: 1px solid var(--hairline); text-align: center; transition: all .3s;
+}
+.pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.pillar .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--gold-tint); color: var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.pillar h3 { font-family: var(--f-display); font-size: 22px; font-weight: 600; }
+.pillar p { font-size: 14px; color: var(--gray); margin: 0; line-height: 1.6; }
+@media (max-width: 880px) { .pillars__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .pillars__grid { grid-template-columns: 1fr; } }
+
+/* ---- Nature banner ---- */
+.nature {
+  position: relative; min-height: 480px; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 0;
+}
+.nature__bg { position: absolute; inset: 0; }
+.nature__bg img { width: 100%; height: 100%; object-fit: cover; }
+.nature__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,43,75,.85) 0%, rgba(27,43,75,.2) 60%); }
+.nature__content { position: relative; padding: 80px 0; color: #EFE9DA; max-width: 660px; }
+.nature__content h2 { color: white; margin-bottom: 16px; }
+.nature__content p { color: #D7DCE9; font-size: 18px; line-height: 1.6; margin: 0; }
+
+/* ---- Principles ---- */
+.principles { background: var(--white); }
+.principles__grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+.principles__list { display: flex; flex-direction: column; gap: 4px; }
+.principle {
+  display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--hairline);
+}
+.principle:last-child { border-bottom: 0; }
+.principle .num { font-family: var(--f-display); font-size: 40px; color: var(--gold); line-height: 1; min-width: 56px; }
+.principle h3 { margin-bottom: 6px; }
+.principle p { font-size: 15px; color: var(--gray); margin: 0; line-height: 1.5; }
+@media (max-width: 880px) { .principles__grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ---- CTA bottom ---- */
+.about-cta { background: var(--navy); color: #E5E9F2; text-align: center; }
+.about-cta h2 { color: white; max-width: 800px; margin: 0 auto 16px; }
+.about-cta p { color: #B7C0D5; max-width: 600px; margin: 0 auto 36px; font-size: 18px; }
+
+/* ---- Floating leaf ornament ---- */
+.leaf-orn { width: 80px; height: 24px; color: var(--gold); }
+</style>
+</head>
+<body data-page="sobre">
+<div id="nav-mount"></div>
+
+<!-- ============ HERO ============ -->
+<section class="about-hero">
+  <div class="container container--wide">
+    <div class="about-hero__grid">
+      <div class="reveal">
+        <div class="eyebrow">Sobre mí · Cristian Casamitjana</div>
+        <h1>Si sientes que estás atrapado en patrones que no entiendes… <em>no estás solo.</em></h1>
+        <p class="intro">"Yo también pasé por ese proceso. Y fue ahí donde empezó todo."</p>
+        <div style="margin-top: 36px; display:flex; gap:16px; flex-wrap:wrap">
+          <a class="btn btn--primary" href="#enfoque">Conocer mi enfoque</a>
+          <a class="btn btn--ghost" href="contacto.html">Reservar sesión →</a>
+        </div>
+      </div>
+      <div class="visual reveal">
+        <img src="assets/cris-full.jpg" alt="Cristian Casamitjana" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY 1 ============ -->
+<section class="story-block">
+  <div class="container container--wide">
+    <div class="story-block__grid">
+      <div class="reveal">
+        <span class="eyebrow">Mi historia</span>
+        <h2>Durante años, viví sintiéndome juzgado e intentando encajar.</h2>
+        <p>Me esforzaba demasiado por agradar, sobre todo en mis relaciones. Repetía patrones sin darme cuenta, con una autoestima baja que no me permitía sentirme a gusto conmigo mismo ni reconocer mis propias capacidades.</p>
+        <p>Hasta que <strong>una crisis profunda a los 25 años</strong> me obligó a parar y empezar a mirar hacia dentro.</p>
+        <ul class="tags">
+          <li>Autoestima</li><li>Patrones relacionales</li><li>Mirar hacia dentro</li>
+        </ul>
+      </div>
+      <div class="story-block__visual reveal">
+        <img src="assets/cris-glasses.jpg" alt="Cristian — retrato natural" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY 2 ============ -->
+<section class="story-block alt section--cream">
+  <div class="container container--wide">
+    <div class="story-block__grid">
+      <div class="reveal">
+        <span class="eyebrow">El punto de inflexión</span>
+        <h2>Venía de viajes, intensidad y búsqueda constante. En el fondo, me estaba evitando.</h2>
+        <p>Fue a través de ese momento de tristeza, y de empezar un proceso terapéutico, cuando entendí algo clave:</p>
+        <p style="font-family:var(--f-display);font-style:italic;font-size:21px;color:var(--navy);line-height:1.5">No era solo lo que me pasaba, sino todo lo que había aprendido, heredado y repetido sin darme cuenta.</p>
+        <p>Ese proceso me llevó a reconstruir mi forma de verme, entender mis patrones y empezar a vivir con más coherencia. Y es desde ahí desde donde hoy acompaño a otras personas.</p>
+      </div>
+      <div class="story-block__visual reveal">
+        <img src="assets/cris-tree-environment.jpg" alt="Cristian en entorno natural" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEY QUOTE ============ -->
+<section class="keyquote">
+  <div class="container container--narrow reveal">
+    <div class="ornament"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9l-7 1 5 5-1 7 6-3 6 3-1-7 5-5-7-1z"/></svg></div>
+    <blockquote>
+      No se trata de convertirte en alguien distinto,<br/>
+      sino de <em>dejar de vivir desde lo que aprendiste</em><br/>
+      y empezar a habitar <em>lo que realmente eres.</em>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ APPROACH / 4 PILLARS ============ -->
+<section class="pillars" id="enfoque">
+  <div class="container container--wide">
+    <div class="pillars__head reveal">
+      <span class="eyebrow">Mi enfoque</span>
+      <h2>Hoy, ese camino es el que utilizo para acompañar a otras personas</h2>
+      <p class="lead">Trabajo desde una psicología integrativa que tiene en cuenta cuatro dimensiones que se sostienen entre sí.</p>
+    </div>
+    <div class="pillars__grid">
+      <article class="pillar reveal">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg>
+        </div>
+        <h3>Lo emocional</h3>
+        <p>Lo que sientes realmente. Las emociones que se activan una y otra vez y aún no has podido nombrar.</p>
+      </article>
+      <article class="pillar reveal">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM15 3a3 3 0 0 1 3 3v12a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/></svg>
+        </div>
+        <h3>Lo mental</h3>
+        <p>Cómo piensas, qué te dices y por qué entras en bucles que no llegan a ningún sitio.</p>
+      </article>
+      <article class="pillar reveal">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.5 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0 0 20.5 15"/></svg>
+        </div>
+        <h3>Lo conductual</h3>
+        <p>Lo que haces, lo que evitas y lo que repites sin darte cuenta en las situaciones difíciles.</p>
+      </article>
+      <article class="pillar reveal">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8M12 22v-4M5 8a7 7 0 0 0 7 7 7 7 0 0 0 7-7M9 5l3-3 3 3"/></svg>
+        </div>
+        <h3>Lo transgeneracional</h3>
+        <p>Lo que has heredado sin darte cuenta: lealtades, miedos y mandatos familiares que aún operan en ti.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NATURE BANNER ============ -->
+<section class="nature">
+  <div class="nature__bg"><img src="assets/cris-banner.jpg" alt="Cristian en entorno natural" /></div>
+  <div class="container container--wide">
+    <div class="nature__content reveal">
+      <span class="eyebrow" style="color:var(--gold-soft)">Más allá del trabajo</span>
+      <h2>La naturaleza y la sencillez forman parte de cómo vivo… y de cómo acompaño.</h2>
+      <p>Vivo en un entorno natural donde encuentro calma, claridad y conexión. Eso me devuelve siempre a lo esencial — y es la misma actitud con la que entro a cada sesión.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRINCIPLES ============ -->
+<section class="principles">
+  <div class="container container--wide">
+    <div class="principles__grid">
+      <div class="reveal">
+        <span class="eyebrow">No es un proceso pasivo</span>
+        <h2>En lo que creo, sin medias tintas.</h2>
+        <p class="lead">No creo en soluciones rápidas ni en que alguien externo venga a «arreglarte». Creo en hacerlo juntos, pero con tu compromiso en el centro.</p>
+        <a class="btn btn--primary" href="programa.html" style="margin-top:24px">Ver programa de 7 semanas</a>
+      </div>
+      <div class="principles__list reveal">
+        <div class="principle">
+          <div class="num">01</div>
+          <div>
+            <h3>Responsabilidad personal</h3>
+            <p>Asumir tu parte en lo que sientes, en lo que repites y en lo que puedes cambiar.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="num">02</div>
+          <div>
+            <h3>Consciencia</h3>
+            <p>Ver lo que no quieres ver. Mirarlo sin juicio. Comprenderlo sin huir.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="num">03</div>
+          <div>
+            <h3>Profundidad</h3>
+            <p>Ir al origen, no quedarnos en la superficie. Sostener el proceso el tiempo que necesite.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="about-cta section--navy" style="padding: clamp(80px,9vw,120px) 0">
+  <div class="container container--narrow text-center">
+    <h2>Si sientes que este enfoque conecta contigo,<br/>da el primer paso.</h2>
+    <p>Reserva tu sesión de reconocimiento gratuita. Hablamos de tu momento y vemos si este proceso es para ti.</p>
+    <a class="btn btn--primary btn--lg" href="contacto.html">Reservar mi sesión gratis</a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="partials.js"></script>
+</body>
+</html>

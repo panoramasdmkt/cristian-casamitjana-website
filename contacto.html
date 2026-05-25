@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contacto · Cristian Casamitjana · Psicología integrativa</title>
+<meta name="description" content="Escríbeme. Suelo responder en 24-48h hábiles. Reserva una sesión o pregúntame por el programa de 7 semanas." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+.contact { background: var(--cream); padding-top: clamp(56px, 7vw, 90px); }
+.contact__grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 80px; align-items: start; }
+.contact__intro h1 { font-size: clamp(40px, 5vw, 60px); line-height: 1.1; margin-bottom: 20px; }
+.contact__intro h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+.contact__intro p { font-size: 17px; color: var(--ink-soft); line-height: 1.6; }
+.contact__info { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+.contact__info .item { display: flex; gap: 16px; align-items: flex-start; }
+.contact__info .ico { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-tint); color: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact__info strong { display: block; color: var(--navy); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.contact__info small { color: var(--gray); font-size: 14px; }
+
+.contact__photo {
+  margin-top: 48px; aspect-ratio: 5/3; border-radius: 12px; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.contact__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.form-card {
+  background: var(--white); border-radius: 14px; padding: clamp(32px, 4vw, 48px);
+  border: 1px solid var(--hairline); box-shadow: var(--shadow);
+}
+.form-card h2 { font-size: 28px; margin-bottom: 8px; }
+.form-card .sub { color: var(--gray); font-size: 14px; margin-bottom: 32px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+.field label .req { color: var(--gold); }
+.field input, .field textarea, .field select {
+  border: 0; border-bottom: 1.5px solid var(--hairline); padding: 12px 0; font: inherit; font-size: 15px;
+  background: transparent; color: var(--ink); outline: 0; transition: border-color .2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); }
+.field textarea { resize: vertical; min-height: 120px; border: 1px solid var(--hairline); border-radius: 8px; padding: 16px; background: var(--cream); }
+.field textarea:focus { border-color: var(--gold); }
+.field .help { font-size: 12px; color: var(--gray); }
+
+.radios { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.radio { position: relative; cursor: pointer; }
+.radio input { position: absolute; opacity: 0; }
+.radio span {
+  display: block; padding: 14px 16px; text-align: center; border: 1px solid var(--hairline);
+  border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--ink-soft); transition: all .2s;
+}
+.radio input:checked + span { background: var(--navy); color: white; border-color: var(--navy); }
+.radio:hover span { border-color: var(--gold); }
+
+.checkbox { display: flex; gap: 12px; align-items: flex-start; padding: 16px; background: var(--cream); border-radius: 8px; margin: 24px 0; cursor: pointer; }
+.checkbox input { margin-top: 3px; accent-color: var(--gold); }
+.checkbox span { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.checkbox a { color: var(--gold); text-decoration: underline; }
+
+.submit-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-card .submit-row small { color: var(--gray); font-size: 13px; }
+
+@media (max-width: 880px) { .contact__grid { grid-template-columns: 1fr; gap: 40px; } .form-row, .radios { grid-template-columns: 1fr; } }
+
+/* Success modal */
+.thanks { display: none; }
+.thanks.is-on { display: block; }
+.thanks .form-card { text-align: center; }
+.thanks .check {
+  width: 72px; height: 72px; border-radius: 50%; background: var(--gold-tint); color: var(--gold);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;
+}
+.thanks h2 { font-family: var(--f-display); font-size: 32px; }
+.thanks p { font-size: 17px; color: var(--ink-soft); }
+</style>
+</head>
+<body data-page="contacto">
+<div id="nav-mount"></div>
+
+<section class="contact">
+  <div class="container container--wide">
+    <div class="contact__grid">
+      <!-- Left intro -->
+      <div class="contact__intro reveal">
+        <span class="eyebrow">Hablemos</span>
+        <h1>Si crees que este trabajo puede ser <em>para ti</em>, escríbeme.</h1>
+        <p>Cuéntame en qué momento estás, qué te trae aquí y cómo crees que puedo ayudarte. Suelo responder personalmente en 24–48 horas hábiles.</p>
+
+        <div class="contact__info">
+          <div class="item">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div>
+              <strong>Email</strong>
+              <small>hola@cristiancasamitjana.com</small>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div>
+              <strong>Respuesta</strong>
+              <small>24–48 horas hábiles</small>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.5a8 8 0 0 1 16 0c0 7-8 11.5-8 11.5z"/><circle cx="12" cy="10.5" r="3"/></svg></div>
+            <div>
+              <strong>Modalidad</strong>
+              <small>Online en todo el mundo · Presencial en Cataluña (consultar)</small>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.5a8 8 0 0 1 16 0c0 7-8 11.5-8 11.5z"/><path d="M9 11l2 2 4-4"/></svg></div>
+            <div>
+              <strong>Confidencialidad</strong>
+              <small>Toda comunicación está protegida por secreto profesional.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact__photo">
+          <img src="assets/cris-portrait.jpg" alt="Cristian Casamitjana" />
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="reveal">
+        <form id="contactForm" class="form-card" onsubmit="event.preventDefault(); document.getElementById('contactForm').style.display='none'; document.getElementById('thanks').classList.add('is-on'); window.scrollTo({ top: document.getElementById('thanks').offsetTop - 80, behavior:'smooth'});">
+          <h2>Cuéntame tu situación</h2>
+          <p class="sub">Todos los campos marcados con <span class="gold">*</span> son obligatorios.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Nombre completo <span class="req">*</span></label>
+              <input type="text" required placeholder="Tu nombre" />
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" required placeholder="tu@correo.com" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" placeholder="(opcional)" />
+            </div>
+            <div class="field">
+              <label>¿Desde dónde escribes?</label>
+              <input type="text" placeholder="Ciudad / País" />
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 24px">
+            <label>¿En qué te puedo ayudar? <span class="req">*</span></label>
+            <div class="radios">
+              <label class="radio"><input type="radio" name="interest" /><span>Sesión 1 a 1</span></label>
+              <label class="radio"><input type="radio" name="interest" checked /><span>Programa 7 semanas</span></label>
+              <label class="radio"><input type="radio" name="interest" /><span>Otra consulta</span></label>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 24px">
+            <label>Cuéntame qué te trae aquí <span class="req">*</span></label>
+            <textarea required minlength="20" placeholder="Escríbeme con la confianza de quien sabe que esto es confidencial. Cuanto más concreto, mejor podré orientarte."></textarea>
+            <span class="help">Mínimo 20 caracteres. Cuéntamelo con tus palabras — yo me encargo del resto.</span>
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" required />
+            <span>He leído y acepto la <a href="#">Política de Privacidad</a>. Doy mi consentimiento para que mis datos sean tratados según el RGPD y usados únicamente para responder a esta consulta.</span>
+          </label>
+
+          <div class="submit-row">
+            <button class="btn btn--primary btn--lg" type="submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+              Enviar mensaje
+            </button>
+            <small>Te responderé personalmente en 24–48h.</small>
+          </div>
+        </form>
+
+        <!-- Thanks -->
+        <div id="thanks" class="thanks">
+          <div class="form-card">
+            <div class="check">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Tu mensaje ha llegado.</h2>
+            <p>Lo leeré con calma y te responderé en las próximas 24–48 horas. Gracias por dar este paso — y por confiarme tu tiempo.</p>
+            <p style="margin-top:24px"><a class="btn btn--secondary" href="contenidos.html">Mientras tanto, explora contenidos</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ small -->
+<section style="background: var(--white); padding: clamp(72px,9vw,110px) 0">
+  <div class="container container--narrow text-center">
+    <span class="eyebrow">Antes de escribir</span>
+    <h2>Quizá te ayude saber esto</h2>
+    <p class="lead" style="margin: 0 auto 40px; max-width: 680px">No hace falta tener todas las respuestas para escribirme. Solo claridad mínima sobre dónde estás y qué buscas.</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align:left; margin: 40px auto">
+      <div style="background: var(--cream); padding: 28px; border-radius: 12px">
+        <strong style="display:block; color: var(--navy); margin-bottom: 8px; font-family: var(--f-display); font-size: 18px">¿Es una urgencia clínica?</strong>
+        <p style="margin:0; font-size: 14px; color: var(--gray)">Si estás en una crisis aguda o emergencia, por favor contacta los servicios de salud mental locales o el 024 (España). Este formulario no es un canal de urgencia.</p>
+      </div>
+      <div style="background: var(--cream); padding: 28px; border-radius: 12px">
+        <strong style="display:block; color: var(--navy); margin-bottom: 8px; font-family: var(--f-display); font-size: 18px">¿Y si aún no tengo claro qué quiero?</strong>
+        <p style="margin:0; font-size: 14px; color: var(--gray)">No hace falta. La sesión de reconocimiento gratuita está pensada precisamente para eso. Te escucho, te oriento y vemos juntos si encaja.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="partials.js"></script>
+</body>
+</html>
